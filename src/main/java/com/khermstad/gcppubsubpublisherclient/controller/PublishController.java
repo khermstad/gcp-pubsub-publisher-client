@@ -30,7 +30,8 @@ public class PublishController {
             String schemaUrl, 
             String eventType,
             String eventTimestamp, 
-            String createdTime) {
+            String createdTime,
+            String transactionType) {
         
         Map<String, String> headers = new HashMap<>();
         
@@ -42,8 +43,9 @@ public class PublishController {
         headers.put("eventTimestamp", eventTimestamp);
         headers.put("createdTime", createdTime);
         headers.put("entity", entity);
+        headers.put("transactionType", transactionType);
         
-        ListenableFuture future = pubSubTemplate.publish("topic1", payload, headers);
+        ListenableFuture future = pubSubTemplate.publish("receipt", payload, headers);
         System.out.println(future);
     }
 
